@@ -1,5 +1,7 @@
 📄GIMP AI アシスタントにバージョンアップ！
 GIMP AI ASSISTANT
+Official Download & Guide (Global)
+▶ https://d-dchannel.github.io/GIMP-AI-Assistant/
 
 「AIで背景自動切抜き」：最新のAIが、人物や商品を一瞬で正確に切り抜きます。
 
