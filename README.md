@@ -1,4 +1,4 @@
-📄GIMP AI アシスタントにバージョンアップ！
+📄GIMP3.0 AI アシスタントにバージョンアップ！
 GIMP AI ASSISTANT
 Official Download & Guide (Global)
 ▶ https://d-dchannel.github.io/GIMP-AI-Assistant/
