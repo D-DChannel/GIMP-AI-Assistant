@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIMP AI Assistant v1.3 - Free Photoshop AI Alternative (Local & Batch AI)</title>
+    <meta name="description" content="Ultimate free GIMP AI plugin for 1-click background removal, object erasing, batch processing, Remote Canvas, and automatic AI lip-sync. 100% Local and Privacy-focused.">
+    <style>
+        :root {
+            --primary: #00ccff;
+            --secondary: #ff00ff;
+            --success: #28a745;
+            --dark: #1a202c;
+            --light: #f8f9fa;
+            --text: #2d3748;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            color: var(--text);
+            background-color: #f4f6f9;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d3748 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
+        header p { font-size: 1.2rem; color: #cbd5e0; max-width: 700px; margin: 0 auto; }
+        .hero-badges { margin-top: 15px; }
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .badge.highlight { background: var(--secondary); border: none; }
+
+        /* Multi-Language Quick Link */
+        .lang-switch {
+            text-align: right;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        .lang-switch a { color: var(--primary); text-decoration: none; margin-left: 10px; font-weight: bold; }
+
+        /* Action Section */
+        .download-box {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        .download-box h2 { color: var(--secondary); margin-bottom: 20px; }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            min-width: 260px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .btn-dl { background-color: var(--success); }
+        .btn-guide { background-color: #3182ce; }
+        .btn-yt { background-color: #e53e3e; font-size: 0.95rem; padding: 10px 20px; }
+
+        /* Video */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Core Features (1 to 5 Order) */
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .section-title span { font-size: 0.9rem; color: #718096; font-weight: normal; }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .feature-card:nth-child(even) { border-left-color: var(--secondary); }
+        .feature-num {
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #a0aec0;
+            margin-bottom: 5px;
+        }
+        .feature-card h3 { font-size: 1.4rem; color: var(--dark); margin-bottom: 10px; }
+        .feature-card p { color: #4a5568; margin-bottom: 15px; }
+        .feature-card ul { padding-left: 20px; color: #4a5568; }
+        .feature-card li { margin-bottom: 8px; }
+
+        /* Benefits Table */
+        .benefits-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 40px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .benefits-table th, .benefits-table td { padding: 15px; text-align: left; border: 1px solid #e2e8f0; }
+        .benefits-table th { background-color: #edf2f7; font-weight: bold; color: var(--dark); }
+        .benefits-table td strong { color: var(--dark); }
+
+        /* Setup Guide */
+        .setup-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .setup-box h3 { margin-top: 20px; margin-bottom: 10px; color: var(--dark); border-bottom: 1px solid #edf2f7; padding-bottom: 5px;}
+        .setup-box h3:first-child { margin-top: 0; }
+        .alert-box {
+            background-color: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            color: #c53030;
+        }
+        code, pre {
+            background: #edf2f7;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+        pre { padding: 15px; overflow-x: auto; display: block; margin: 10px 0; line-height: 1.4; }
+        ol, ul { padding-left: 20px; }
+        ol li, ul li { margin-bottom: 10px; }
+
+        /* Samples Section */
+        .samples-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0 35px 0;
+        }
+        .samples-grid a {
+            display: inline-block;
+            background: #e2e8f0;
+            color: var(--dark);
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #cbd5e0;
+        }
+        .samples-grid a:hover { background: #cbd5e0; }
+
+        /* Footer / Disclaimer */
+        footer {
+            background: #edf2f7;
+            padding: 25px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+        .footer-ja { margin-top: 15px; padding-top: 15px; border-top: 1px solid #cbd5e0; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="lang-switch">
+            <a href="#english">🌐 English</a> | <a href="#japanese">🇯🇵 日本語</a>
+        </div>
+
+        <!-- HEADER -->
+        <header id="english">
+            <h1>GIMP AI Assistant v1.3</h1>
+            <p>The Ultimate Free Photoshop AI Alternative. Empower GIMP with powerful Local AI automation, background removal, smart editing, and lip-syncing.</p>
+            <div class="hero-badges">
+                <span class="badge highlight">100% Local AI (Privacy First)</span>
+                <span class="badge">GIMP 3.0 Ready</span>
+                <span class="badge">No Subscription Fees</span>
+            </div>
+        </header>
+
+        <!-- DOWNLOAD & LINKS SECTION -->
+        <div class="download-box">
+            <h2>🚀 Get Started / ダウンロード</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <a href="https://www.youtube.com/channel/UC-wa6LPkGf8MBxQP0VBqi0g" target="_blank" class="btn btn-yt">
+                    📺 Subscribe to YouTube「D&Dチャンネル」 to support this project!
+                </a>
+            </div>
+
+            <div class="btn-group">
+                <!-- Direct ZIP download linking to the file in the Assets screenshot -->
+                <a href="https://github.com/D-DChannel/GIMP-AI-Assistant/releases/download/v1.3/GIMP.AI.ASSISTANT1.3.zip" class="btn btn-dl">
+                    ⬇️ Download Plugin (.zip) <br><span style="font-size:0.8rem; font-weight:normal;">Windows / 281MB</span>
+                </a>
+                <!-- Link to the main guide page mentioned in the screenshot -->
+                <a href="https://createkidslab.com/gimp1_3/" target="_blank" class="btn btn-guide">
+                    📖 View Operation Guide <br><span style="font-size:0.8rem; font-weight:normal;">Detailed Manual</span>
+                </a>
+            </div>
+            <p style="font-size: 0.9rem; color: #718096;">Compatible with GIMP 3.0+ on Windows</p>
+        </div>
+
+        <!-- VIDEO PLAYER -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/-MraCXPuR3Q?si=G46-PN41XKxDA1hH" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <!-- CORE FEATURES ORDERED 1 TO 5 -->
+        <h2 class="section-title">📄 What Makes It Mind-Blowing! <span>5 Core Power Features</span></h2>
+        
+        <div class="feature-card">
+            <div class="feature-num">Feature 01</div>
+            <h3>✨ 1. AI Background Automatic Cutting (AI背景自動切抜き)</h3>
+            <p><strong>Isolate any subject instantly.</strong> Remove backgrounds from portraits, products, or complex objects with a single click. The intelligent engine automatically identifies foreground subjects even with intricate backdrops, instantly porting the masked result directly back into GIMP layers.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-num">Feature 02</div>
+            <h3>🧹 2. Natural Smart Erase / Inpainting (余計なものを消す・ナチュラルに削除)</h3>
+            <p><strong>Magically wipe away unwanted objects.</strong> Use it just like a healing brush. Simply highlight what you want removed, and the AI samples the surrounding texture to blend it seamlessly, leaving no trace. Click "Final Adjustment" (最終調整) to apply a smooth native mask.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-num">Feature 03</div>
+            <h3>⚡ 3. Automated Mass Batch Processing (大量一括バッチ処理)</h3>
+            <p><strong>Process hundreds of images while you rest.</strong> Turn on "Auto Batch Processing" (自動バッチ処理) to run your checked pipeline across an entire folder. The AI assistant will automatically execute Background Cutting, Scenery Enhancement, Portrait Sharpening, and Auto White Balance on all files consecutively.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-num">Feature 04</div>
+            <h3>🎨 4. REMOTE CANVAS - Browser-Based Sketch Tool (リモートキャンバス)</h3>
+            <p><strong>Zero installation required!</strong> A lightweight, highly fluid web canvas that turns your browser into an illustration engine. Perfect for quick mockups, student learning, or asset creation.</p>
+            <ul>
+                <li><strong>Instant Clipboard Share:</strong> Click "Copy as PNG" to instantly store your graphics on your clipboard, ready to paste (Ctrl+V) directly into GIMP, PowerPoint, Word, or Teams.</li>
+                <li><strong>Intuitive UI:</strong> Easy-to-use layers, shape lock features, and responsive brushes suitable for creators of all ages.</li>
+                <li><em>Tip: Keep your browser zoom at 100% for perfectly aligned bucket fills!</em></li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-num">Feature 05</div>
+            <h3>🎙️ 5. AI Lip-Sync Animation Engine (自動リップシンク)</h3>
+            <p><strong>Bring your characters to life with voice files.</strong> Load an audio track, and the AI calculates sound frequencies down to 0.1-second steps to generate mouth configurations (open/mid/closed) and body movements (body1-4) automatically.</p>
+            <ul>
+                <li><strong>Direct GIMP Sync:</strong> Outputs results straight into sequential GIMP animation layers.</li>
+                <li><strong>Video Editor Ready:</strong> Simply drop the exported animated GIF into your timeline, and it synchronizes perfectly with your voice track. No manual framing needed.</li>
+            </ul>
+        </div>
+
+        <!-- 4 POWER BENEFITS -->
+        <h2 class="section-title">🛡️ 4 Unbeatable Global Advantages <span>Why Creators Choose This</span></h2>
+        <table class="benefits-table">
+            <thead>
+                <tr>
+                    <th>Advantage</th>
+                    <th>Why it matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Ultimate Privacy</strong></td>
+                    <td><strong>Zero data leak risks.</strong> All AI compute runs 100% locally on your machine. Confidential or commercial artwork never leaves your desk.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. 100% Free Forever</strong></td>
+                    <td><strong>$0 subscription costs.</strong> Say goodbye to monthly fees. Access industrial-grade generative utilities completely free.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Instant Response Time</strong></td>
+                    <td><strong>No network latency.</strong> Bypassing cloud queues means instant processing that isn't dependent on your internet speed.</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Perfect Consistency</strong></td>
+                    <td><strong>Flawless execution.</strong> Replicate identical batch outputs meticulously across high-volume digital assets.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SETUP GUIDE & TECHNICAL DOCUMENTATION -->
+        <h2 class="section-title">⚙️ Step-by-Step Installation Guide <span>Easy 2-Step Run</span></h2>
+        <div class="setup-box">
+            
+            <div class="alert-box">
+                <strong>⚠️ IMPORTANT NOTICE FOR FIRST-TIME RUNS:</strong><br>
+                1. <strong>Initial Load:</strong> The first time you click "AI Background Cutting", the tool automatically maps and downloads necessary weights locally. This may take 1-2 minutes depending on your PC. Subsequent runs are near-instant.<br>
+                2. <strong>Security Warnings:</strong> When launching <code>main.exe</code>, Windows Defender might prompt a warning. Click "More Info" -> "Run Anyway".
+            </div>
+
+            <h3>1️⃣ Step 1: Place GIMP Plug-in Folders (First Time Only)</h3>
+            <p>Move the following two folders from the downloaded pack into your GIMP plugins directory:</p>
+            <ul>
+                <li><strong>Folders to copy:</strong> <code>ai_lipsync_engine</code> and <code>remote_listener</code></li>
+                <li><strong>Windows Target Path:</strong><br>
+                    <code>C:\Users\&lt;Your_Username&gt;\AppData\Roaming\GIMP\3.0\plug-ins\</code>
+                </li>
+            </ul>
+            <p><em>*Note: Restart GIMP completely after moving the folders.</em></p>
+
+            <h3>2️⃣ Step 2: Folder Structure Reference</h3>
+            <p>Keep the downloaded folder layout intact without shifting core files:</p>
+            <pre>GIMP AI ASSISTANT1.3/
+├─AI_Input          &lt;-- Place raw images here
+├─AI_Output         &lt;-- Processed files save here automatically
+├─ main.exe         &lt;-- Double-click to boot the local AI server
+├─ models/
+├─ plug-ins/
+│   ├─ ai_lipsync_engine
+│   └─ remote_listener
+├─ audio/           &lt;-- Store lip-sync voice clips here
+└─ internal/</pre>
+
+            <h3>3️⃣ Step 3: Daily Workflow & Usage</h3>
+            <ol>
+                <li>Launch GIMP. Every session, trigger the native server: Go to GIMP Menu -> <strong>Filters -> Development -> Script-Fu -> [Start Server]</strong>. Confirm Port is <code>10008</code> and click OK.</li>
+                <li>Double-click and launch <strong><code>main.exe</code></strong>.</li>
+                <li>Drop your images into the <code>AI_Input</code> folder.</li>
+                <li>Interact using the local browser dashboard interface to activate cutting, erasing, or automated batch workflows!</li>
+            </ol>
+        </div>
+
+        <!-- SAMPLES MATERIAL LINK -->
+        <div class="setup-box" style="background:#fff;">
+            <h3 style="border:none;">📸 Sample Practice Assets</h3>
+            <p style="font-size:0.9rem; color:#718096; margin-bottom:10px;">Click below to download free test materials via Pixabay & Unsplash:</p>
+            <div class="samples-grid">
+                <a href="https://pixabay.com/photos/women-girl-model-clothing-top-8318437/" target="_blank" rel="nofollow">Sample 1 (Portrait)</a>
+                <a href="https://pixabay.com/photos/asian-woman-white-shirt-fashion-7127159/" target="_blank" rel="nofollow">Sample 2 (Fashion)</a>
+                <a href="https://pixabay.com/photos/woman-model-portrait-pose-style-6468303/" target="_blank" rel="nofollow">Sample 3 (Model)</a>
+                <a href="https://pixabay.com/photos/high-heels-stilettos-shoes-heels-463770/" target="_blank" rel="nofollow">Sample 4 (Shoes)</a>
+                <a href="https://pixabay.com/photos/handbag-purse-fashion-bag-female-883122/" target="_blank" rel="nofollow">Sample 5 (Product Bag)</a>
+            </div>
+        </div>
+
+        <!-- JAPANESE SYNOPSIS (BACKWARD COMPATIBILITY) -->
+        <h2 class="section-title" id="japanese">🇯🇵 日本語概要 <span>GIMP AI アシスタント1.3</span></h2>
+        <div class="feature-card" style="border-left-color: #38a169;">
+            <p><strong>GIMP専用のAI切り抜き＆AIリップシンク機能、そしてブラウザだけで軽快に動作する新機能「リモートキャンバス」が追加された最新安定版です。</strong></p>
+            <p style="margin-top: 10px;">面倒な背景透過、不要物除去、大量の画像一括処理（オートバッチ処理）まですべてボタン一つでクリエイターの代わりにAIアシスタントがローカル処理します。データ流出リスクがなく完全無料でサブスク費用もかかりません。</p>
+        </div>
+
+        <!-- FOOTER & LEGAL -->
+        <footer>
+            <p><strong>Terms & Disclaimer:</strong> Use this software utility at your own risk. The developer bears absolutely no responsibility for any forms of damage, data issues, or disadvantages arising from downloading, installing, or operating this application. Redistribution, deep modifications, unauthorized transfers, or commercial monetization of the binaries/source materials (including secondary uses) are stringently prohibited.</p>
+            <div class="footer-ja">
+                <p><strong>免責事項:</strong> 本ソフトウェアの利用、およびダウンロード・導入は自己責任で行ってください。本ツールの利用によって生じたいかなる損害や不利益についても、開発者は一切の責任を負いません。また、ダウンロードしたファイルの再配布、およびソースコードの改変・譲渡・販売（二次利用を含む）は固く禁じます。</p>
+                <p style="margin-top:10px; text-align:center;">Copyright &copy; D&amp;Dチャンネル All Rights Reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
