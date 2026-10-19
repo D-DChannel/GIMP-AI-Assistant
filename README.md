@@ -1,83 +1,91 @@
-📄GIMP3.0 AI アシスタントにバージョンアップ！</br>
-GIMP AI ASSISTANT</br>
-Official Download & Guide (Global)</br>
+# 📄 Upgrade to GIMP 3.0 AI Assistant!
+
+**GIMP AI ASSISTANT**  
+Official Download & Guide (Global)  
 ▶ https://d-dchannel.github.io/GIMP-AI-Assistant/
 
-「AIで背景自動切抜き」：最新のAIが、人物や商品を一瞬で正確に切り抜きます。
+---
 
-「手動で切り抜き（マスク）」：細かく切り抜けていない部分がある場合ボタン一つで調整用のレイヤーマスクを追加。消えすぎた部分をサッと元に戻せます。
+## ✨ Features & Highlights
 
-「ナチュラルに削除」：不要なものを消したい時、範囲を選択してボタンを押すだけ。周りの要素と馴染ませる「修正用レイヤー」を自動生成。あとは微調整するだけです。
+* **AI Auto Background Removal**: State-of-the-art AI automatically isolates subjects (people or products) in a fraction of a second with incredible precision.
+* **Manual Fine-Tuning (Masking)**: Need minor adjustments? Add a tweaking layer mask with a single click to instantly restore any over-erased details.
+* **Seamless Object Removal**: Erase unwanted objects effortlessly. Select the area, click the button, and the tool generates an "Adjustment Layer" that seamlessly blends with surrounding textures for easy fine-tuning.
+* **Landscape Sharpness Enhancement**: Crisp and vibrant enhancement tailored specifically for scenery and landscape photos.
+* **Portrait Sharpness Enhancement**: Enhances clarity and skin detail for portraits.
+* **Auto White Balance**: Automatically eliminates color casts to restore original, true-to-life colors and clean whites.
+* **Final Touch**: Adds an adjustment layer mask right and allows you to erase remaining edges naturally.
+* **Invert Mask**: Quick toggle to invert layer masks between black and white.
+* **Black & White**: Instantly convert any image into a high-quality monochrome photo.
+* **E-Commerce & ID Photo AI Auto-Crop**: Simply set your desired image size and margins. The AI detects the subject and crops it perfectly—ideal for online marketplace listings and official ID photos!
+* **Automated Batch Processing**: Combine features like *Crop + Resize + Enhancement* for bulk workflows. Put your images in the `AI_Input` folder, and let the AI process hundreds of photos automatically without stopping.
 
-「風景くっきり補正」：風景写真などをくっきりした写真に仕上げます。
+---
 
-「人物くっきり補正」：人物写真などをくっきりした写真に仕上げます。</br>
-「自動WB」：写真の「色被り」を自動解消。白いものを白く、本来の色を呼び戻します。</br>
-「最終調整」：「ナチュラルに削除」を適用した後にボタン一つで調整用のレイヤーマスクを追加。余分な部分を馴染ませながら削除できます。</br>
-「反転」：レイヤーマスクを黒色・白色に反転させるときに便利です。</br>
-「白黒」：ボタン一つで写真を白黒写真にします。</br>
-「 EC・証明写真 AI自動切り抜き」：商品写真の「サイズ」と「余白」を指定するだけ。AIが被写体を判別し、一瞬で理想のサイズへ。フリマ出品や証明写真に最適です！</br>
-「自動バッチ処理 (画像処理自動化)」：「切り抜き＋リサイズ＋補正」など、お好みの機能を組み合わせて一括処理。AI_Inputフォルダ内の大量の写真を、AIが眠らずに自動で仕上げます。
+## ⚡ Quick Start in 2 Easy Steps
 
-⚡ 驚くほど簡単な 2ステップ・スタート</br>
-GIMPの[サーバースタート]をクリック</br>
-AIを起動（main.exeをダブルクリック）</br>
-これだけで、GIMPの作業に最強のAIアシスタントが手助けします！
+1. Click **[Start Server]** in GIMP.
+2. Launch the AI by double-clicking **`main.exe`**.
 
+That's it! Enjoy your powered-up editing workflow in GIMP.
 
-⚠️ 最初に必ずお読みください（重要事項）
-初回のAI切り抜きには時間がかかります 初めて「AI切り抜き」ボタンを押した際、同梱のAIデータをPC内の適切な場所に自動で配置します。PCのスペックにより1〜2分程度かかる場合がありますが、2回目以降は高速に動作します。
+---
 
-セキュリティソフトの警告について 本ツール（main.exe）を起動する際、Windows Defender等の警告が出ることがあります。「詳細情報」をクリックし「実行」を選択してください。
+## ⚠️ Important Notices (Please Read First)
 
-GIMPの通信設定（毎回必要） GIMP側で操作を受け付けるために、GIMPを起動するたびに以下の操作を行ってください。
+* **First-Time AI Initialization**: The first time you click "AI Background Removal," the bundled AI models will automatically configure themselves on your PC. This initial process may take 1–2 minutes depending on your PC specifications. Subsequent operations will run at full speed.
+* **Security Software Warnings**: When launching `main.exe`, Windows Defender or your antivirus software may display a warning. Click **"More info"** and select **"Run anyway"**.
+* **GIMP Connection Setup (Required every session)**: To allow GIMP to communicate with the AI assistant, perform the following step each time you open GIMP:
+  * Go to the top menu: **Filters** → **Development** → **Script-Fu** → Click **[Start Server]**.
+  * Ensure the port number is set to **`10008`**, then click **OK**.
 
-メニューの「フィルター」→「Development」→「Script-Fu」→[サーバースタート] をクリック。
+---
 
-ポート番号が 10008 であることを確認して「OK」を押す。
+## 🛠️ Installation & Setup
 
-1️⃣ 準備：GIMPプラグインの配置（初回のみ）
-リモート操作を受け取るためのファイルを、手動で指定の場所に置く必要があります。
+### 1️⃣ Preparation: Place the GIMP Plugin (First time only)
+You need to manually copy the remote communication file into GIMP's plugin folder.
 
-配置するファイル： remote_listenerフォルダー
+* **Folder to copy**: `remote_listener`
+* **Target Directory (Windows)**:  
+  `C:\Users\<Your-Username>\AppData\Roaming\GIMP\3.0\plug-ins\remote_listener\remote_listener`  
+  *(Place the `remote_listener` directory inside the `plug-ins` folder)*
+* **Next Step**: Close GIMP completely and restart it.
 
-配置場所（Windows）： C:\Users\<ユーザー名>\AppData\Roaming\GIMP\3.0\plug-ins\remote_listener\remote_listener
-※ フォルダをplug-insの中に入れてください。
+### 2️⃣ Directory Structure
+> ⚠️ **Do not move or rename files** within the distributed folder structure.
 
-配置後の操作： GIMPを一度終了し、再起動してください。
+```text
+GIMP AI ASSISTANT1.2/
+├─ AI_Input/
+├─ AI_Output/
+├─ main.exe
+├─ models/
+└─ remote_listener/
+   └─ remote_listener.py
+```
 
-2️⃣ フォルダ構造の確認
-配布されたフォルダの中身を移動させないでください。
+### 3️⃣ How to Use
 
-GIMP AI ASSISTANT1.2/</br>
-├─AI_Input（切り抜きたい画像を入れる）</br>
-├─AI_Output（切り抜いた画像を保存。フォルダー名を変えると新しくAI_Outputフォルダーが作成される）</br>
-├─ main.exe (AIをダブルクリックで起動)</br>
-├─ models/ (削除禁止)</br>
-│ └─ u2net.onnx</br>
-├─ remote_listener/ (プラグインへ移動またはコピー＆ペーストするだけ）</br>
-│ └─ remote_listener.py</br>
+1. Launch GIMP and perform **Filters** → **Development** → **Script-Fu** → **[Start Server]**.
+2. Launch **`main.exe`**.
+3. Place your target images into the `AI_Input` folder.
+4. **Operate via Web Interface** (Click *"Display GIMP AI Assistant Screen"* at the top).  
+   Clicking the buttons on the web interface starts the AI background removal and processing. Once complete, the images will automatically appear in GIMP and be saved to the `AI_Output` folder.
 
+---
 
-3️⃣ 使い方（手順）
-GIMPを起動 し、「フィルター」→「Development」→「Script-Fu」→[サーバースタート] を行います。
+### 4️⃣ Troubleshooting & Important Notes
 
-main.exeを起動 します。
+* **Error: "AI_Input is empty"**: Make sure you have placed valid image files (`.jpg` or `.png`) inside the `AI_Input` folder.
+* **No response when clicking buttons**: Verify that `main.exe` is running and that you didn't forget to start the server in GIMP (**Filters → Development → Script-Fu → Start Server**).
+* **System Load**: Heavy AI computation may temporarily spike CPU/GPU usage, but performance will return to normal as soon as processing finishes.
 
-AI_Input フォルダの中に切り抜きたい画像を入れます。
+---
 
-▶ Webサイトで操作 (上部の「GIMP AI アシスタント画面を表示」)</br>
-Webサイトのボタンを押すと、AI切り抜きや加工が始まります。</br>
-AI切り抜き完了後は、自動的にGIMPに画像が表示されAI_Outputフォルダーに保存されます。
- 
+## ⚖️ Disclaimer & License
 
-4️⃣ 注意点・トラブルシューティング
-「AI_Inputが空です」というエラー AI_Input フォルダの中に、画像ファイル（.jpgや.png）が入っているか確認してください。
+Please use, download, and install this software at your own risk. The developer assumes no responsibility for any damages, losses, or issues arising from the use of this tool.  
+Redistribution of downloaded files, as well as modification, transfer, re-licensing, or sale of the source code (including secondary use), is strictly prohibited.
 
-ボタンを押しても反応がない main.exe が起動しているか、GIMPの「サーバー開始」を忘れていないか確認してください。
-
-PCの負荷 AI処理中は一時的にPCの動作が重くなることがありますが、処理が終われば元に戻ります。
-
-⚠️ 免責事項
-本ソフトウェア（Webアプリ）の利用、およびダウンロード・導入は自己責任で行ってください。本ツールの利用によって生じたいかなる損害や不利益についても、開発者は一切の責任を負いません。</br>また、ダウンロードしたファイルの再配布、およびソースコードの改変・譲渡・販売（二次利用を含む）は固く禁じます。</br>
-Copyright © D&Dチャンネル All Rights Reserved.
+**Copyright © D&D Channel. All Rights Reserved.**
